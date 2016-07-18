@@ -10,6 +10,11 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "backtory_auth_key", '"575d1432e4b006215e29ad9a"'
+        buildConfigField "String", "backtory_auth_instance_id", '"575d1432e4b099f61fd535cd"'
+        buildConfigField "String", "backtory_lambda_instance_id", '"575d1433e4b099f61fd535d1"'
+        buildConfigField "String", "backtory_game_instance_id", '"575d1432e4b099f61fd535d0"'
     }
     buildTypes {
         release {
@@ -20,14 +25,14 @@ android {
 }
 repositories {
     maven {
-        url 'https://dl.bintray.com/alireza-farahani/maven/'
+        url 'https://dl.bintray.com/pegah-backtory/maven/'
     }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.backtory.android:backtorysdk:0.1.6'
+    compile 'com.backtory.android:backtorysdk:0.2.0'
     compile 'com.android.support:design:23.4.0'
     compile 'org.apache.commons:commons-lang3:3.0'
 }

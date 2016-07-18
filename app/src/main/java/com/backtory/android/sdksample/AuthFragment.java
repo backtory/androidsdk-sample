@@ -3,10 +3,10 @@ package com.backtory.android.sdksample;
 
 import android.view.View;
 
-import com.backtory.androidsdk.auth.BacktoryAuth;
+import com.backtory.androidsdk.HttpStatusCode;
+import com.backtory.androidsdk.internal.BacktoryAuth;
 import com.backtory.androidsdk.internal.BacktoryCallBack;
-import com.backtory.androidsdk.internal.BacktoryResponse;
-import com.backtory.androidsdk.internal.HttpStatusCode;
+import com.backtory.androidsdk.model.BacktoryResponse;
 import com.backtory.androidsdk.model.BacktoryUser;
 import com.backtory.androidsdk.model.GuestRegistrationParam;
 import com.backtory.androidsdk.model.LoginResponse;
@@ -18,7 +18,7 @@ import static com.backtory.android.sdksample.MainActivity.gson;
 import static com.backtory.android.sdksample.MainActivity.lastGenPassword;
 import static com.backtory.android.sdksample.MainActivity.lastGenUsername;
 
-public class AuthFragment extends MainActivity.AbsFragment implements View.OnClickListener{
+public class AuthFragment extends MainActivity.AbsFragment implements View.OnClickListener {
 
   void register() {
     new BacktoryUser.Builder().
@@ -226,7 +226,7 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
 
   @Override
   public void onClick(View view) {
-    switch (view.getId()){
+    switch (view.getId()) {
       case R.id.button_register_user:
         register();
         break;

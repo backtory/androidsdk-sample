@@ -22,10 +22,6 @@ import com.backtory.androidsdk.model.BacktoryResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 
@@ -34,28 +30,10 @@ public class MainActivity extends AppCompatActivity {
   static String lastGenEmail = "";
   static String lastGenUsername = "";
   static String lastGenPassword = "";
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    // Get the ViewPager and set it's PagerAdapter so that it can display items
-    ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
-        MainActivity.this));
-
-    // Give the TabLayout the ViewPager
-    TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-    tabLayout.setupWithViewPager(viewPager);
-
-    PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
-  }
+  static Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
 
   //-----------------------------------------------------------------------------
-
-  static Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
   static String generateEmail(boolean random) {
     String s = random ? randomAlphabetic(3) + "@" + randomAlphabetic(3) + ".com" : "ar.d.farahani@gmail.com";
@@ -75,17 +53,32 @@ public class MainActivity extends AppCompatActivity {
     return s;
   }
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    // Get the ViewPager and set it's PagerAdapter so that it can display items
+    ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
+        MainActivity.this));
+
+    // Give the TabLayout the ViewPager
+    TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+    tabLayout.setupWithViewPager(viewPager);
+
+    PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+  }
+
   //-----------------------------------------------------------------------------
   public abstract static class AbsFragment extends Fragment {
-    @BindView(R.id.textview)
     TextView textView;
-    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       View v = inflater.inflate(getLayoutRes(), container, false);
-      unbinder = ButterKnife.bind(this, v);
+      textView = (TextView) v.findViewById(R.id.textview);
       return v;
     }
 
@@ -109,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
       Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onDestroyView() {
-      super.onDestroyView();
-      unbinder.unbind();
-    }
   }
 
   //---------------------------------------------------------------------------

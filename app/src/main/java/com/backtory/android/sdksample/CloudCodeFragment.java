@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Toast;
 
+import com.backtory.androidsdk.HttpStatusCode;
 import com.backtory.androidsdk.internal.BacktoryCallBack;
-import com.backtory.androidsdk.internal.BacktoryResponse;
-import com.backtory.androidsdk.internal.HttpStatusCode;
-import com.backtory.androidsdk.lambda.BacktoryCloudCode;
+import com.backtory.androidsdk.internal.BacktoryCloudCode;
+import com.backtory.androidsdk.model.BacktoryResponse;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,11 +63,11 @@ public class CloudCodeFragment extends MainActivity.AbsFragment implements View.
   }
 
   static class Info {
+    String id;
+
     public Info(String id) {
       this.id = id;
     }
-
-    String id;
   }
 
   static class Person {

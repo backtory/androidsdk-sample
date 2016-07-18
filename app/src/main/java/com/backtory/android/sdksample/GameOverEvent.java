@@ -5,9 +5,6 @@ import com.backtory.androidsdk.annotation.FieldName;
 import com.backtory.androidsdk.model.BacktoryEvent;
 
 
-/**
- * Created by Alireza Farahani on 7/2/2016.
- */
 public class GameOverEvent extends BacktoryEvent {
     @EventName
     public static final String eventName = "GameOver";

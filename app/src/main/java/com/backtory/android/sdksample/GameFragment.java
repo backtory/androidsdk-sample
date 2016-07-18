@@ -12,10 +12,9 @@ import com.backtory.androidsdk.model.BacktoryLeaderBoard.LeaderBoardResponse;
 
 import java.util.Random;
 
-/**
- * Created by Alireza Farahani on 6/24/2016.
- */
+
 public class GameFragment extends MainActivity.AbsFragment implements View.OnClickListener {
+  private static Random random = new Random(System.currentTimeMillis());
   TextView coinView;
   TextView timeView;
   private int coinValue;
@@ -122,8 +121,6 @@ public class GameFragment extends MainActivity.AbsFragment implements View.OnCli
           }
         });*/
   }
-
-  private static Random random = new Random(System.currentTimeMillis());
 
   private void refreshTimeCoin() {
     coinValue = random.nextInt(100);
