@@ -13,8 +13,7 @@ import com.backtory.androidsdk.model.BacktoryLeaderBoard.LeaderBoardResponse;
 import java.util.Random;
 
 
-public class GameFragment extends MainActivity.AbsFragment implements View.OnClickListener {
-  private static Random random = new Random(System.currentTimeMillis());
+public class GameFragment extends MainActivity.AbsFragment {
   TextView coinView;
   TextView timeView;
   private int coinValue;
@@ -32,6 +31,12 @@ public class GameFragment extends MainActivity.AbsFragment implements View.OnCli
     coinView = (TextView) v.findViewById(R.id.textview_coin);
     timeView = ((TextView) v.findViewById(R.id.textview_time));
     return v;
+  }
+
+  @Override
+  protected int[] getButtonsId() {
+    return new int[]{R.id.button_send_event, R.id.button_leader_board_rank, R.id.button_leader_board_tops,
+        R.id.button_leader_board_around_me};
   }
 
   @Override
@@ -121,6 +126,8 @@ public class GameFragment extends MainActivity.AbsFragment implements View.OnCli
           }
         });*/
   }
+
+  private static Random random = new Random(System.currentTimeMillis());
 
   private void refreshTimeCoin() {
     coinValue = random.nextInt(100);

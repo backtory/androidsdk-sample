@@ -3,7 +3,6 @@ package com.backtory.android.sdksample;
 
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Toast;
 
 import com.backtory.androidsdk.HttpStatusCode;
 import com.backtory.androidsdk.internal.BacktoryCallBack;
@@ -13,31 +12,36 @@ import com.backtory.androidsdk.model.BacktoryResponse;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CloudCodeFragment extends MainActivity.AbsFragment implements View.OnClickListener {
+public class CloudCodeFragment extends MainActivity.AbsFragment  {
 
 
   @Override
+  protected int[] getButtonsId() {
+    return new int[]{R.id.button_public_echo, R.id.button_private_search};
+  }
+
+  @Override
   protected int getLayoutRes() {
-    return R.layout.fragment_lambda;
+    return R.layout.fragment_cloud_code;
   }
 
   //-------------------------------------------------------------
 
   void publicEcho() {
-    //BacktoryCloudCode.performCloudFunctionAsync("echo", "body body body!", false, String.class, this.<String>printCallBack());
-    BacktoryCloudCode.performCloudFunctionAsync(
+    //BacktoryCloudCode.runInBackground("echo", "body body body!", false, String.class, this.<String>printCallBack());
+    BacktoryCloudCode.runInBackground(
         "echo", "body body body!",
         String.class, new BacktoryCallBack<String>() {
           @Override
           public void onResponse(BacktoryResponse<String> response) {
             if (response.isSuccessful())
-              Toast.makeText(getContext(), response.body(), Toast.LENGTH_SHORT).show();
+              textView.setText(response.body());
           }
         });
   }
 
   void privateGetPerson() {
-    BacktoryCloudCode.performCloudFunctionAsync("hello", new Info("453"), Person.class, new BacktoryCallBack<Person>() {
+    BacktoryCloudCode.runInBackground("hello", new Info("453"), Person.class, new BacktoryCallBack<Person>() {
       @Override
       public void onResponse(BacktoryResponse<Person> response) {
         if (response.isSuccessful()) {
@@ -56,18 +60,18 @@ public class CloudCodeFragment extends MainActivity.AbsFragment implements View.
       case R.id.button_public_echo:
         publicEcho();
         break;
-      case R.id.button_private_get_person:
+      case R.id.button_private_search:
         privateGetPerson();
         break;
     }
   }
 
   static class Info {
-    String id;
-
     public Info(String id) {
       this.id = id;
     }
+
+    String id;
   }
 
   static class Person {

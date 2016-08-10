@@ -4,7 +4,6 @@ package com.backtory.android.sdksample;
 import android.view.View;
 
 import com.backtory.androidsdk.HttpStatusCode;
-import com.backtory.androidsdk.internal.BacktoryAuth;
 import com.backtory.androidsdk.internal.BacktoryCallBack;
 import com.backtory.androidsdk.model.BacktoryResponse;
 import com.backtory.androidsdk.model.BacktoryUser;
@@ -18,7 +17,7 @@ import static com.backtory.android.sdksample.MainActivity.gson;
 import static com.backtory.android.sdksample.MainActivity.lastGenPassword;
 import static com.backtory.android.sdksample.MainActivity.lastGenUsername;
 
-public class AuthFragment extends MainActivity.AbsFragment implements View.OnClickListener {
+public class AuthFragment extends MainActivity.AbsFragment{
 
   void register() {
     new BacktoryUser.Builder().
@@ -73,28 +72,33 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
     });*/
   }
 
+/*  @OnClick(R.id.button_new_token)
   void newAccessToken() {
     try {
       BacktoryAuth.getNewAccessTokenASync(this.<LoginResponse>printCallBack());
     } catch (IllegalStateException ise) {
       toast(ise.getMessage());
     }
-  }
+  }*/
 
-  void guestRegister() {
-    new BacktoryUser().registerAsGuestInBackground(new BacktoryCallBack<BacktoryUser>() {
-      @Override
-      public void onResponse(BacktoryResponse<BacktoryUser> response) {
-        if (response.isSuccessful()) {
-          lastGenUsername = response.body().getUsername();
-          lastGenPassword = response.body().getGuestPassword();
-          textView.setText(gson.toJson(response.body()));
-        } else {
-          HttpStatusCode statusCode = HttpStatusCode.getErrorByCode(response.code());
-          textView.setText(statusCode.code() + statusCode.name());
+  void guestLogin() {
+    try {
+      BacktoryUser.loginAsGuestInBackground(new BacktoryCallBack<LoginResponse>() {
+        @Override
+        public void onResponse(BacktoryResponse<LoginResponse> response) {
+          if (response.isSuccessful()) {
+            lastGenUsername = BacktoryUser.getCurrentUser().getUsername();
+            lastGenPassword = BacktoryUser.getCurrentUser().getGuestPassword();
+            textView.setText(gson.toJson(response.body()));
+          } else {
+            HttpStatusCode statusCode = HttpStatusCode.getErrorByCode(response.code());
+            textView.setText(statusCode.code() + statusCode.name());
+          }
         }
-      }
-    });
+      });
+    } catch (IllegalStateException ise) {
+      toast(ise.getMessage());
+    }
     /*new BacktoryUser().registerAsGuestInBackground(new BacktoryCallBack<BacktoryUser>() {
       @Override
       public void onResponse(BacktoryResponse<BacktoryUser> response) {
@@ -110,11 +114,14 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
 //EditText emailInput = new EditText(getContext());
 
   void completeGuestReg() {
+    lastGenUsername = generateUsername(true);
+    lastGenPassword = "guest pass";
     BacktoryUser.getCurrentUser().completeRegistrationInBackground(new GuestRegistrationParam.Builder().
             setFirstName("not guest!").setLastName("not guest last name").
-            setEmail(generateEmail(true)).setNewPassword("guest pass").
-            setNewUsername(generateUsername(true)).build(),
+            setEmail(generateEmail(true)).setNewPassword(lastGenPassword).
+            setNewUsername(lastGenUsername).build(),
         this.<BacktoryUser>printCallBack());
+
 
 
     /*GuestRegistrationParam params = new GuestRegistrationParam.Builder().
@@ -161,6 +168,8 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
         });*/
   }
 
+  //TODO: not available now
+  /*@OnClick(R.id.button_forget_pass)
   void forgetPass() {
     BacktoryUser.forgotPasswordInBackground(lastGenUsername, new BacktoryCallBack<Void>() {
       @Override
@@ -168,7 +177,7 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
         textView.setText(response.isSuccessful() ? "suc" : "fail " + response.message());
       }
     });
-    /*BacktoryUser.forgotPasswordInBackground(userNameInput.getText().toString(), new BacktoryCallBack<Void>() {
+    *//*BacktoryUser.forgotPasswordInBackground(userNameInput.getText().toString(), new BacktoryCallBack<Void>() {
       @Override
       public void onResponse(BacktoryResponse<Void> response) {
         if (response.isSuccessful()) {
@@ -178,8 +187,8 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
         } else
           Toast.makeText(getContext(), "request failed", Toast.LENGTH_SHORT).show();
       }
-    });*/
-  }
+    });*//*
+  }*/
 
   void updateUser() {
     BacktoryUser currentUser = BacktoryUser.getCurrentUser();
@@ -213,6 +222,13 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
   }
 
   @Override
+  protected int[] getButtonsId() {
+    return new int[]{R.id.button_register_user, R.id.button_login_user, R.id.button_guest_login,
+        R.id.button_complete_guest, R.id.button_change_pass, R.id.button_current_user,
+        R.id.button_update_user, R.id.button_logout};
+  }
+
+  @Override
   protected int getLayoutRes() {
     return R.layout.fragment_auth;
   }
@@ -226,27 +242,21 @@ public class AuthFragment extends MainActivity.AbsFragment implements View.OnCli
 
   @Override
   public void onClick(View view) {
-    switch (view.getId()) {
+    switch (view.getId()){
       case R.id.button_register_user:
         register();
         break;
       case R.id.button_login_user:
         login();
         break;
-      case R.id.button_new_token:
-        newAccessToken();
-        break;
-      case R.id.button_guest_register:
-        guestRegister();
+      case R.id.button_guest_login:
+        guestLogin();
         break;
       case R.id.button_complete_guest:
         completeGuestReg();
         break;
       case R.id.button_change_pass:
         changePass();
-        break;
-      case R.id.button_forget_pass:
-        forgetPass();
         break;
       case R.id.button_update_user:
         updateUser();

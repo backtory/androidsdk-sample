@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.backtory.android.sdksampleMainActivity">
+    tools:context="com.backtory.android.sdksample.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,20 +42,20 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="login" />
-        <Button
+        <!--<Button
             android:id="@+id/button_new_token"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="new token" />
+            android:text="new token" />-->
         <Button
-            android:id="@+id/button_guest_register"
+            android:id="@+id/button_guest_login"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="guest reg" />
+            android:text="guest login" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,13 +75,13 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="change pass" />
-        <Button
+        <!--<Button
             android:id="@+id/button_forget_pass"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="forget pass" />
+            android:text="forget pass" />-->
         <Button
             android:id="@+id/button_current_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -94,13 +94,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
+        <!--<Button
             android:id="@+id/button_user_by_name"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="user by name" />
+            android:text="user by name" />-->
         <Button
             android:id="@+id/button_update_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"

@@ -30,10 +30,28 @@ public class MainActivity extends AppCompatActivity {
   static String lastGenEmail = "";
   static String lastGenUsername = "";
   static String lastGenPassword = "";
-  static Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    // Get the ViewPager and set it's PagerAdapter so that it can display items
+    ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
+        MainActivity.this));
+
+    // Give the TabLayout the ViewPager
+    TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+    tabLayout.setupWithViewPager(viewPager);
+
+    PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+  }
 
 
   //-----------------------------------------------------------------------------
+
+  static Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
   static String generateEmail(boolean random) {
     String s = random ? randomAlphabetic(3) + "@" + randomAlphabetic(3) + ".com" : "ar.d.farahani@gmail.com";
@@ -53,25 +71,8 @@ public class MainActivity extends AppCompatActivity {
     return s;
   }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    // Get the ViewPager and set it's PagerAdapter so that it can display items
-    ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
-        MainActivity.this));
-
-    // Give the TabLayout the ViewPager
-    TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-    tabLayout.setupWithViewPager(viewPager);
-
-    PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
-  }
-
   //-----------------------------------------------------------------------------
-  public abstract static class AbsFragment extends Fragment {
+  public abstract static class AbsFragment extends Fragment implements View.OnClickListener {
     TextView textView;
 
     @Nullable
@@ -79,8 +80,13 @@ public class MainActivity extends AppCompatActivity {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       View v = inflater.inflate(getLayoutRes(), container, false);
       textView = (TextView) v.findViewById(R.id.textview);
+      for (int id : getButtonsId()){
+        v.findViewById(id).setOnClickListener(this);
+      }
       return v;
     }
+
+    protected abstract int[] getButtonsId();
 
     protected abstract
     @LayoutRes
