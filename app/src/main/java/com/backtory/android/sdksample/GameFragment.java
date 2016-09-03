@@ -14,6 +14,7 @@ import java.util.Random;
 
 
 public class GameFragment extends MainActivity.AbsFragment {
+  private static Random random = new Random(System.currentTimeMillis());
   TextView coinView;
   TextView timeView;
   private int coinValue;
@@ -29,7 +30,7 @@ public class GameFragment extends MainActivity.AbsFragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View v = super.onCreateView(inflater, container, savedInstanceState);
     coinView = (TextView) v.findViewById(R.id.textview_coin);
-    timeView = ((TextView) v.findViewById(R.id.textview_time));
+    timeView = (TextView) v.findViewById(R.id.textview_time);
     return v;
   }
 
@@ -126,8 +127,6 @@ public class GameFragment extends MainActivity.AbsFragment {
           }
         });*/
   }
-
-  private static Random random = new Random(System.currentTimeMillis());
 
   private void refreshTimeCoin() {
     coinValue = random.nextInt(100);
