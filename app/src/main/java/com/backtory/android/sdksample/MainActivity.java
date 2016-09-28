@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
     tabLayout.setupWithViewPager(viewPager);
 
-    PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+    //PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
   }
 
 

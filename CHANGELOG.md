@@ -16,3 +16,6 @@
 * Updating to backtory-SDK v0.3.0 and adding storage sample usages
 * Upgrading buildTool, compile version and some other packages
 * Using gradle plugin of 2.2.0
+
+### 1.3
+* Not Clearing Backtory data on starting app anymore
