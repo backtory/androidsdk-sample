@@ -1,6 +1,5 @@
 package com.backtory.android.sdksample;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
@@ -38,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Get the ViewPager and set it's PagerAdapter so that it can display items
     ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
-        MainActivity.this));
+    viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager()));
 
     // Give the TabLayout the ViewPager
     TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -86,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
       return v;
     }
 
+    /**
+     * Setting enclosing class as click listener for all the layout buttons
+     * @return list of this fragment's buttons ids. Order doesn't matter
+     */
     protected abstract int[] getButtonsId();
 
     protected abstract
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(BacktoryResponse<T> response) {
           if (response.isSuccessful())
-            textView.setText(gson.toJson(response.body()));
+            textView.setText(response.body() != null ? gson.toJson(response.body()) : "successful");
           else
             textView.setText(response.message());
         }
@@ -114,13 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
 
   public static class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"Auth", "Lambda", "Game"};
-    private Context context;
+    private String tabTitles[] = new String[]{"Auth", "Lambda", "Game", "Storage"};
 
-    public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
+    SampleFragmentPagerAdapter(FragmentManager fm) {
       super(fm);
-      this.context = context;
     }
 
     @Override
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public AbsFragment getItem(int position) {
       switch (position) {
         case 0:
           return new AuthFragment();
@@ -137,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
           return new CloudCodeFragment();
         case 2:
           return new GameFragment();
+        case 3:
+          return new StorageFragment();
       }
       return null;
     }

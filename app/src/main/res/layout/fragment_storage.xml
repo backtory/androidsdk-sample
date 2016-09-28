@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            tools:text="Hello World!"/>
+    </ScrollView>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_text_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="path to save files. For example &quot;/folder/avatar/&quot;">
+
+            <requestFocus/>
+        </android.support.design.widget.TextInputEditText>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_upload_single"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="upload single"/>
+
+        <Button
+            android:id="@+id/button_upload_multiple"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="upload multiple"/>
+
+        <Switch
+            android:id="@+id/switch_upload_replacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="replace if exists"/>
+
+
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_rename"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="rename"/>
+
+        <Button
+            android:id="@+id/button_delete"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="delete"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_file_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_file_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="resource address to delete">
+            </android.support.design.widget.TextInputEditText>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -17,8 +17,6 @@ public class GameFragment extends MainActivity.AbsFragment {
   private static Random random = new Random(System.currentTimeMillis());
   TextView coinView;
   TextView timeView;
-  private int coinValue;
-  private int timeValue;
 
   @Override
   protected int getLayoutRes() {
@@ -47,7 +45,7 @@ public class GameFragment extends MainActivity.AbsFragment {
   }
 
   void sendEvent() {
-    new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendAsync(this.<Void>printCallBack());
+    new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendInBackground(this.<Void>printCallBack());
 
     /*new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendAsync(new BacktoryCallBack<Void>() {
       @Override
@@ -129,8 +127,8 @@ public class GameFragment extends MainActivity.AbsFragment {
   }
 
   private void refreshTimeCoin() {
-    coinValue = random.nextInt(100);
-    timeValue = random.nextInt(200);
+    int coinValue = random.nextInt(100);
+    int timeValue = random.nextInt(200);
     coinView.setText(String.valueOf(coinValue));
     timeView.setText(String.valueOf(timeValue));
   }
