@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('backtory-java-sdk-all-0.3.0-java.jar'))

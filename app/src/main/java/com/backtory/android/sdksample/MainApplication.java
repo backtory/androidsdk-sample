@@ -1,20 +1,22 @@
 package com.backtory.android.sdksample;
 
 import android.app.Application;
+import android.util.Log;
 
-import com.backtory.androidsdk.Storage;
-import com.backtory.androidsdk.internal.Backtory;
-import com.backtory.androidsdk.internal.Config;
+import com.backtory.java.Timber;
+import com.backtory.java.internal.BacktoryClient;
+import com.backtory.java.internal.Config;
+import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 
 public class MainApplication extends Application {
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    Backtory.init(this, Config.newBuilder().storage(new Storage.SharedPreferencesStorage(this)).
-        initAuth(BuildConfig.backtory_auth_instance_id, BuildConfig.backtory_auth_key).
-        initCloudCode(BuildConfig.backtory_lambda_instance_id).
-        initGame(BuildConfig.backtory_game_instance_id).
-        initStorage(BuildConfig.backtory_storage_instance_id).
-        build());
-  }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        BacktoryClient.Android.init(Config.newBuilder()
+                .initAuth(BuildConfig.backtory_auth_instance_id, BuildConfig.backtory_auth_key)
+                .initCloudCode(BuildConfig.backtory_lambda_instance_id)
+                .initGame(BuildConfig.backtory_game_instance_id)
+                .initConnectivity(BuildConfig.backtory_connectivity_instance_id)
+                .build(), this);
+    }
 }

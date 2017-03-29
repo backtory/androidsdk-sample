@@ -7,45 +7,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.backtory.androidsdk.model.BacktoryLeaderBoard.LeaderBoardRank;
-import com.backtory.androidsdk.model.BacktoryLeaderBoard.LeaderBoardResponse;
+import com.backtory.java.model.BacktoryLeaderBoard;
 
 import java.util.Random;
 
 
 public class GameFragment extends MainActivity.AbsFragment {
-  private static Random random = new Random(System.currentTimeMillis());
-  TextView coinView;
-  TextView timeView;
+    private static Random random = new Random(System.currentTimeMillis());
+    TextView coinView;
+    TextView timeView;
 
-  @Override
-  protected int getLayoutRes() {
-    return R.layout.fragment_game;
-  }
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.fragment_game;
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View v = super.onCreateView(inflater, container, savedInstanceState);
-    coinView = (TextView) v.findViewById(R.id.textview_coin);
-    timeView = (TextView) v.findViewById(R.id.textview_time);
-    return v;
-  }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        coinView = (TextView) v.findViewById(R.id.textview_coin);
+        timeView = (TextView) v.findViewById(R.id.textview_time);
+        return v;
+    }
 
-  @Override
-  protected int[] getButtonsId() {
-    return new int[]{R.id.button_send_event, R.id.button_leader_board_rank, R.id.button_leader_board_tops,
-        R.id.button_leader_board_around_me};
-  }
+    @Override
+    protected int[] getButtonsId() {
+        return new int[]{R.id.button_send_event, R.id.button_leader_board_rank, R.id.button_leader_board_tops,
+                R.id.button_leader_board_around_me};
+    }
 
-  @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    refreshTimeCoin();
-  }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        refreshTimeCoin();
+    }
 
-  void sendEvent() {
-    new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendInBackground(this.<Void>printCallBack());
+    void sendEvent() {
+        new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendInBackground(this.<Void>printCallBack());
 
     /*new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendAsync(new BacktoryCallBack<Void>() {
       @Override
@@ -74,11 +73,11 @@ public class GameFragment extends MainActivity.AbsFragment {
       }
     });*/
 
-    refreshTimeCoin();
-  }
+        refreshTimeCoin();
+    }
 
-  void getPlayerRank() {
-    new TopPlayersLeaderBoard().getPlayerRankInBackground(this.<LeaderBoardRank>printCallBack());
+    void getPlayerRank() {
+        new TopPlayersLeaderBoard().getPlayerRankInBackground(this.<BacktoryLeaderBoard.LeaderBoardRank>printCallBack());
     /*new TopPlayersLeaderBoard().getPlayerRankInBackground(new BacktoryCallBack<LeaderBoardRank>() {
       @Override
       public void onResponse(BacktoryResponse<LeaderBoardRank> response) {
@@ -90,10 +89,10 @@ public class GameFragment extends MainActivity.AbsFragment {
         }
       }
     });*/
-  }
+    }
 
-  void getTopPlayers() {
-    new TopPlayersLeaderBoard().getTopPlayersInBackground(2, this.<LeaderBoardResponse>printCallBack());
+    void getTopPlayers() {
+        new TopPlayersLeaderBoard().getTopPlayersInBackground(2, this.<BacktoryLeaderBoard.LeaderBoardResponse>printCallBack());
     /*new TopPlayersLeaderBoard().getTopPlayersInBackground(2, new BacktoryCallBack<LeaderBoardResponse>() {
       @Override
       public void onResponse(BacktoryResponse<LeaderBoardResponse> response) {
@@ -106,10 +105,10 @@ public class GameFragment extends MainActivity.AbsFragment {
         }
       }
     });*/
-  }
+    }
 
-  void getAroundMePlayers() {
-    new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(2, this.<LeaderBoardResponse>printCallBack());
+    void getAroundMePlayers() {
+        new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(2, this.<BacktoryLeaderBoard.LeaderBoardResponse>printCallBack());
     /*new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(3, new BacktoryCallBack<LeaderBoardResponse>() {
           @Override
           public void onResponse(BacktoryResponse<LeaderBoardResponse> response) {
@@ -124,30 +123,30 @@ public class GameFragment extends MainActivity.AbsFragment {
             }
           }
         });*/
-  }
-
-  private void refreshTimeCoin() {
-    int coinValue = random.nextInt(100);
-    int timeValue = random.nextInt(200);
-    coinView.setText(String.valueOf(coinValue));
-    timeView.setText(String.valueOf(timeValue));
-  }
-
-  @Override
-  public void onClick(View view) {
-    switch (view.getId()) {
-      case R.id.button_send_event:
-        sendEvent();
-        break;
-      case R.id.button_leader_board_rank:
-        getPlayerRank();
-        break;
-      case R.id.button_leader_board_tops:
-        getTopPlayers();
-        break;
-      case R.id.button_leader_board_around_me:
-        getAroundMePlayers();
-        break;
     }
-  }
+
+    private void refreshTimeCoin() {
+        int coinValue = random.nextInt(100);
+        int timeValue = random.nextInt(200);
+        coinView.setText(String.valueOf(coinValue));
+        timeView.setText(String.valueOf(timeValue));
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_send_event:
+                sendEvent();
+                break;
+            case R.id.button_leader_board_rank:
+                getPlayerRank();
+                break;
+            case R.id.button_leader_board_tops:
+                getTopPlayers();
+                break;
+            case R.id.button_leader_board_around_me:
+                getAroundMePlayers();
+                break;
+        }
+    }
 }

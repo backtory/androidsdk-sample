@@ -9,16 +9,7 @@
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed">
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="auth"/>
-
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lambda"/>
+        app:tabMode="scrollable">
 
     </android.support.design.widget.TabLayout>
 

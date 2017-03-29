@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':backtory-java-sdk-all-0.3.0-java'

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.backtory.android.sdksample.MainActivity">
+    tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,57 +32,83 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_send_event"
+            android:id="@+id/login_challenge_user_1"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="send event" />
+            android:text="login challenge user 1" />
 
-        <TextView
-            android:id="@+id/textview_coin"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/login_challenge_user_2"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            tools:text="coin: 40" />
+            android:text="login challenge user 2" />
 
-        <TextView
-            android:id="@+id/textview_time"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/realtime_connect"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            tools:text="time: 100" />
+            android:text="realtime connect" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_leader_board_rank"
+            android:id="@+id/request_challenge"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="my rank" />
+            android:text="request challenge" />
 
         <Button
-            android:id="@+id/button_leader_board_tops"
+            android:id="@+id/cancel_challenge"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="top players" />
-
-        <Button
-            android:id="@+id/button_leader_board_around_me"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="around me" />
+            android:text="cancel challenge (NOT implemented yet!)" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/accept_challenge"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="accept challenge" />
+
+        <Button
+            android:id="@+id/decline_challenge"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="decline challenge" />
+
+        <Button
+            android:id="@+id/request_active_challenges"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="request active challenges" />
+
+    </LinearLayout>
+
 </LinearLayout>

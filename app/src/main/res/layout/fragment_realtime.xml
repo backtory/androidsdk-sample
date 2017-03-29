@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.backtory.android.sdksample.MainActivity">
+    tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,57 +32,52 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_send_event"
+            android:id="@+id/connect_to_match"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="send event" />
+            android:text="connect to match" />
 
-        <TextView
-            android:id="@+id/textview_coin"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/send_event"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            tools:text="coin: 40" />
+            android:text="send_event" />
 
-        <TextView
-            android:id="@+id/textview_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="time: 100" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_leader_board_rank"
+            android:id="@+id/direct_message"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="my rank" />
+            android:text="direct message" />
 
         <Button
-            android:id="@+id/button_leader_board_tops"
+            android:id="@+id/send_chat_to_match"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="top players" />
+            android:text="send chat to match" />
 
         <Button
-            android:id="@+id/button_leader_board_around_me"
+            android:id="@+id/send_match_result"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="around me" />
+            android:text="send match result" />
 
     </LinearLayout>
+
 </LinearLayout>
