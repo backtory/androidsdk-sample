@@ -3,9 +3,9 @@ package com.backtory.android.sdksample;
 import android.view.View;
 
 import com.backtory.java.internal.BacktoryCallBack;
-import com.backtory.java.model.BacktoryResponse;
-import com.backtory.java.model.BacktoryUser;
-import com.backtory.java.model.LoginResponse;
+import com.backtory.java.internal.BacktoryResponse;
+import com.backtory.java.internal.BacktoryUser;
+import com.backtory.java.internal.LoginResponse;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.core.listeners.ChatListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
@@ -40,15 +40,11 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
     }
 
     private void realtimeConnect() {
-        BacktoryRealtimeAndroidApi.getInstance().connectAsync(
-                "", new BacktoryCallBack<ConnectResponse>() {
-                    @Override
-                    public void onResponse(BacktoryResponse<ConnectResponse> backtoryResponse) {
-                        ChatFragment.this.textView.setText(MainActivity.gson.toJson(backtoryResponse));
-                    }
-                }
-        );
-//                BacktoryUser.getCurrentUser().getUsername(), this.<ConnectResponse>printCallBack());
+        BacktoryRealtimeAndroidApi.getInstance().connectAsync(this.<ConnectResponse>printCallBack());
+    }
+
+    private void realtimeDisconnect() {
+        BacktoryRealtimeAndroidApi.getInstance().disconnectAsync(this.<Void>printCallBack());
     }
 
     private void sendChatMessage() {
@@ -175,7 +171,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
 
     @Override
     protected int[] getButtonsId() {
-        return new int[]{R.id.login_chat_user, R.id.realtime_connect, R.id.send_chat_message,
+        return new int[]{R.id.login_chat_user, R.id.realtime_connect, R.id.realtime_disconnect, R.id.send_chat_message,
                             R.id.create_chat_group, R.id.request_groups_list, R.id.request_members_list,
                             R.id.add_group_member, R.id.remove_group_member, R.id.send_chat_to_group,
                             R.id.request_group_chat_history, R.id.invite_to_group,
@@ -195,6 +191,9 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 break;
             case R.id.realtime_connect:
                 realtimeConnect();
+                break;
+            case R.id.realtime_disconnect:
+                realtimeDisconnect();
                 break;
             case R.id.send_chat_message:
                 sendChatMessage();
@@ -251,8 +250,8 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
     }
 
     @Override
-    public void onGroupChatMessage(SimpleChatMessage simpleChatMessage) {
-        textView.setText("Group chat message received:\n" + MainActivity.gson.toJson(simpleChatMessage));
+    public void onGroupChatMessage(SimpleChatMessage groupChatMessage) {
+        textView.setText("Group chat message received:\n" + MainActivity.gson.toJson(groupChatMessage));
     }
 
     @Override
@@ -268,7 +267,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
 
     @Override
     public void onChatGroupUserJoinedMessage(UserJoinedMessage userJoinedMessage) {
-        textView.setText("User joined to group:\n" + MainActivity.gson.toJson(userJoinedMessage));
+        textView.setText("User joined to gr    public void onChatGroupUserAddedMessage(UserAddedMessage userAddedMessage) {oup:\n" + MainActivity.gson.toJson(userJoinedMessage));
     }
 
     @Override

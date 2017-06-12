@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backtory.java.internal.BacktoryCallBack;
-import com.backtory.java.model.BacktoryResponse;
+import com.backtory.java.internal.BacktoryResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
-        private String tabTitles[] = new String[]{"Auth", "Lambda", "Game", "Storage",
+        private String tabTitles[] = new String[]{"Auth", "Lambda", "Game", "Storage", "Database",
                                                     "Matchmaking", "Challenge", "Realtime", "Chat"};
 
         SampleFragmentPagerAdapter(FragmentManager fm) {
@@ -138,14 +138,16 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return new GameFragment();
                 case 3:
-                    return new StorageFragment();
+                    return new FileStorageFragment();
                 case 4:
-                    return new MatchmakingFragment();
+                    return new DatabaseFragment();
                 case 5:
-                    return new ChallengeFragment();
+                    return new MatchmakingFragment();
                 case 6:
-                    return RealtimeFragment.getInstance();
+                    return new ChallengeFragment();
                 case 7:
+                    return RealtimeFragment.getInstance();
+                case 8:
                     return new ChatFragment();
             }
             return null;

@@ -3,9 +3,9 @@ package com.backtory.android.sdksample;
 import android.view.View;
 
 import com.backtory.java.internal.BacktoryCallBack;
-import com.backtory.java.model.BacktoryResponse;
-import com.backtory.java.model.BacktoryUser;
-import com.backtory.java.model.LoginResponse;
+import com.backtory.java.internal.BacktoryResponse;
+import com.backtory.java.internal.BacktoryUser;
+import com.backtory.java.internal.LoginResponse;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.core.listeners.ChallengeListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
@@ -42,15 +42,11 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
 
 
     private void realtimeConnect() {
-        BacktoryRealtimeAndroidApi.getInstance().connectAsync(
-                "", new BacktoryCallBack<ConnectResponse>() {
-                    @Override
-                    public void onResponse(BacktoryResponse<ConnectResponse> backtoryResponse) {
-                        ChallengeFragment.this.textView.setText(MainActivity.gson.toJson(backtoryResponse));
-                    }
-                }
-        );
-//                BacktoryUser.getCurrentUser().getUsername(), this.<ConnectResponse>printCallBack());
+        BacktoryRealtimeAndroidApi.getInstance().connectAsync(this.<ConnectResponse>printCallBack());
+    }
+
+    private void realtimeDisconnect() {
+        BacktoryRealtimeAndroidApi.getInstance().disconnectAsync(this.<Void>printCallBack());
     }
 
     private void requestChallenge() {
@@ -91,7 +87,7 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
 
     @Override
     protected int[] getButtonsId() {
-        return new int[]{R.id.login_challenge_user_1, R.id.login_challenge_user_2, R.id.realtime_connect,
+        return new int[]{R.id.login_challenge_user_1, R.id.login_challenge_user_2, R.id.realtime_connect, R.id.realtime_disconnect,
                             R.id.request_challenge, R.id.cancel_challenge,
                             R.id.accept_challenge, R.id.decline_challenge, R.id.request_active_challenges};
     }
@@ -112,6 +108,9 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
                 break;
             case R.id.realtime_connect:
                 realtimeConnect();
+                break;
+            case R.id.realtime_disconnect:
+                realtimeDisconnect();
                 break;
             case R.id.request_challenge:
                 requestChallenge();
@@ -153,8 +152,8 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
     }
 
     @Override
-    public void onChallengeImpossible(ChallengeImpossibleMessage challengeImpossibleMessage) {
-        textView.setText("Challenge is impossible!\n" + MainActivity.gson.toJson(challengeImpossibleMessage));
+    public void onChallengeImpossible(ChallengeImpossibleMessage message) {
+        textView.setText("Challenge is impossible!\n" + MainActivity.gson.toJson(message));
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.view.View;
 import com.backtory.java.HttpStatusCode;
 import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryCloudCode;
-import com.backtory.java.model.BacktoryResponse;
+import com.backtory.java.internal.BacktoryResponse;
 
 
 /**

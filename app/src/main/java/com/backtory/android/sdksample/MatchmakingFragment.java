@@ -3,9 +3,9 @@ package com.backtory.android.sdksample;
 import android.view.View;
 
 import com.backtory.java.internal.BacktoryCallBack;
-import com.backtory.java.model.BacktoryResponse;
-import com.backtory.java.model.BacktoryUser;
-import com.backtory.java.model.LoginResponse;
+import com.backtory.java.internal.BacktoryResponse;
+import com.backtory.java.internal.BacktoryUser;
+import com.backtory.java.internal.LoginResponse;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.core.listeners.MatchmakingListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
@@ -38,17 +38,12 @@ public class MatchmakingFragment extends MainActivity.AbsFragment implements Mat
     }
 
     private void realtimeConnect() {
-        BacktoryRealtimeAndroidApi.getInstance().connectAsync(
-                "", new BacktoryCallBack<ConnectResponse>() {
-                    @Override
-                    public void onResponse(BacktoryResponse<ConnectResponse> backtoryResponse) {
-                        MatchmakingFragment.this.textView.setText(MainActivity.gson.toJson(backtoryResponse));
-                    }
-                }
-        );
-//                BacktoryUser.getCurrentUser().getUsername(), this.<ConnectResponse>printCallBack());
+        BacktoryRealtimeAndroidApi.getInstance().connectAsync(this.<ConnectResponse>printCallBack());
     }
 
+    private void realtimeDisconnect() {
+        BacktoryRealtimeAndroidApi.getInstance().disconnectAsync(this.<Void>printCallBack());
+    }
 
     private void requestMatch() {
         BacktoryRealtimeAndroidApi.getInstance().requestMatchmakingAsync(
@@ -75,7 +70,7 @@ public class MatchmakingFragment extends MainActivity.AbsFragment implements Mat
 
     @Override
     protected int[] getButtonsId() {
-        return new int[]{R.id.login_mm_user_1, R.id.login_mm_user_2, R.id.realtime_connect,
+        return new int[]{R.id.login_mm_user_1, R.id.login_mm_user_2, R.id.realtime_connect, R.id.realtime_disconnect,
                             R.id.request_match, R.id.cancel_request};
     }
 
@@ -95,6 +90,9 @@ public class MatchmakingFragment extends MainActivity.AbsFragment implements Mat
                 break;
             case R.id.realtime_connect:
                 realtimeConnect();
+                break;
+            case R.id.realtime_disconnect:
+                realtimeDisconnect();
                 break;
             case R.id.request_match:
                 requestMatch();

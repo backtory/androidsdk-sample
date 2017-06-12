@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -16,8 +17,9 @@ import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryFile;
 import com.backtory.java.internal.BulkOperation;
 import com.backtory.java.internal.Request;
-import com.backtory.java.model.BacktoryResponse;
+import com.backtory.java.internal.BacktoryResponse;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +30,7 @@ import static com.backtory.android.sdksample.FileUtil.getFileName;
 /**
  * @author Alireza Farahani
  */
-public class StorageFragment extends MainActivity.AbsFragment {
+public class FileStorageFragment extends MainActivity.AbsFragment {
     private EditText pathEditText, filAddressEditText;
     private Switch replaceExistingSwitch;
     private List<String> uploadedFiles;
@@ -50,7 +52,7 @@ public class StorageFragment extends MainActivity.AbsFragment {
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_storage;
+        return R.layout.fragment_file_storage;
     }
 
     @Override
@@ -84,6 +86,7 @@ public class StorageFragment extends MainActivity.AbsFragment {
         new BulkOperation.BulkUpload(uploadRequests).commitInBackground(bulkUploadCallBack());
     }
 
+
     public void uploadSingle(String address) {
         String path = pathEditText.getText().toString().trim();
         new BacktoryFile().beginUpload(
@@ -101,7 +104,7 @@ public class StorageFragment extends MainActivity.AbsFragment {
                 if (response.isSuccessful()) {
                     uploadedFiles = response.body();
                 }
-                StorageFragment.this.<List<String>>printCallBack().onResponse(response);
+                FileStorageFragment.this.<List<String>>printCallBack().onResponse(response);
             }
         };
     }
@@ -114,7 +117,7 @@ public class StorageFragment extends MainActivity.AbsFragment {
                 if (response.isSuccessful()) {
                     uploadedFiles = Collections.singletonList(response.body());
                 }
-                StorageFragment.this.<String>printCallBack().onResponse(response);
+                FileStorageFragment.this.<String>printCallBack().onResponse(response);
             }
         };
     }

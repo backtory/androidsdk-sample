@@ -13,6 +13,7 @@ android {
 
         buildConfigField "String", "backtory_auth_key", '"575d1432e4b006215e29ad9a"'
         buildConfigField "String", "backtory_auth_instance_id", '"575d1432e4b099f61fd535cd"'
+        buildConfigField "String", "backtory_object_storage_instance_id", '"575d1432e4b099f61fd535cf"'
         buildConfigField "String", "backtory_lambda_instance_id", '"575d1433e4b099f61fd535d1"'
         buildConfigField "String", "backtory_game_instance_id", '"575d1432e4b099f61fd535d0"'
         buildConfigField "String", "backtory_storage_instance_id", '"578df3c9e4b0ca538f290810"'
@@ -26,6 +27,7 @@ android {
     }
 }
 repositories {
+    mavenLocal ()
     maven {
         url 'https://dl.bintray.com/pegah-backtory/maven/'
     }
@@ -36,6 +38,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'org.apache.commons:commons-lang3:3.0'
-//    compile project(':backtory-java-sdk-all-0.3.0-java')
-    compile 'com.pegah.backtory:backtory-android-sdk:0.4.0'
+    compile 'com.pegah.backtory:backtory-android-sdk:0.5.0'
+    debugCompile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 }

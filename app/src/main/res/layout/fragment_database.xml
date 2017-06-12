@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,99 +24,111 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textSize="18sp"
-            tools:text="Hello World!" />
+            tools:text="Hello World!"/>
+
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/login_challenge_user_1"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_note_title"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="login challenge user 1" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/login_challenge_user_2"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="login challenge user 2" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_note_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Note title (String)" />
 
-        <Button
-            android:id="@+id/realtime_connect"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="realtime connect" />
+        </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/realtime_disconnect"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_note_priority"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="realtime disconnect" />
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_note_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Note priority (Integer)" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Switch
+            android:id="@+id/switch_note_pinned"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Note pinned (Boolean)" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/request_challenge"
+            android:id="@+id/button_save_note"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="request challenge" />
+            android:layout_height="wrap_content"
+            android:text="save note" />
 
         <Button
-            android:id="@+id/cancel_challenge"
+            android:id="@+id/button_delete_note"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="cancel challenge (NOT implemented yet!)" />
+            android:layout_height="wrap_content"
+            android:text="delete note" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample Queries:" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/accept_challenge"
+            android:id="@+id/button_all_pinned_notes"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="accept challenge" />
+            android:layout_height="wrap_content"
+            android:text="all pinned notes" />
 
         <Button
-            android:id="@+id/decline_challenge"
+            android:id="@+id/button_todo_title_notes"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="decline challenge" />
-
-        <Button
-            android:id="@+id/request_active_challenges"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="request active challenges" />
+            android:text="notes with title containing 'todo'" />
 
     </LinearLayout>
 

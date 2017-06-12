@@ -5,10 +5,10 @@ import android.view.View;
 
 import com.backtory.java.HttpStatusCode;
 import com.backtory.java.internal.BacktoryCallBack;
-import com.backtory.java.model.BacktoryResponse;
-import com.backtory.java.model.BacktoryUser;
-import com.backtory.java.model.GuestRegistrationParam;
-import com.backtory.java.model.LoginResponse;
+import com.backtory.java.internal.BacktoryResponse;
+import com.backtory.java.internal.BacktoryUser;
+import com.backtory.java.internal.GuestRegistrationParam;
+import com.backtory.java.internal.LoginResponse;
 
 import static com.backtory.android.sdksample.MainActivity.generateEmail;
 import static com.backtory.android.sdksample.MainActivity.generatePassword;
@@ -235,9 +235,11 @@ public class AuthFragment extends MainActivity.AbsFragment {
 
     void currentUser() {
         BacktoryUser currentUser = BacktoryUser.getCurrentUser();
-        textView.setText("firsName: " + currentUser.getFirstName() + "\n" +
+        if (currentUser == null)
+            textView.setText("No current user!");
+        else
+            textView.setText("firsName: " + currentUser.getFirstName() + "\n" +
                 "username: " + currentUser.getUsername());
-        //BacktoryUser.getCurrentUser().isGuest();
     }
 
     @Override

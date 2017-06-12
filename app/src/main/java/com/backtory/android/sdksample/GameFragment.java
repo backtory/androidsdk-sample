@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.backtory.java.model.BacktoryLeaderBoard;
+import com.backtory.java.internal.BacktoryLeaderBoard.LeaderBoardRank;
+import com.backtory.java.internal.BacktoryLeaderBoard.LeaderBoardResponse;
 
 import java.util.Random;
 
@@ -44,85 +45,22 @@ public class GameFragment extends MainActivity.AbsFragment {
     }
 
     void sendEvent() {
-        new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendInBackground(this.<Void>printCallBack());
-
-    /*new GameOverEvent(random.nextInt(100), random.nextInt(200)).sendAsync(new BacktoryCallBack<Void>() {
-      @Override
-      public void onResponse(BacktoryResponse<Void> response) {
-        if (response.isSuccessful())
-          Toast.makeText(getContext(), "success", Toast.LENGTH_SHORT).show();
-        else {
-          // do something based on error code
-        }
-      }
-    });*/
-
-    /*List<FieldValue> fieldValues = Arrays.asList(
-        new FieldValue("Coin", 100), new FieldValue("Time", 200));
-    BacktoryEvent event = new BacktoryEvent();
-    event.setName("GameOver");
-    event.setFieldsAndValues(fieldValues);
-    event.sendAsync(new BacktoryCallBack<Void>() {
-      @Override
-      public void onResponse(BacktoryResponse<Void> response) {
-        if (response.isSuccessful())
-          Toast.makeText(getContext(), "success", Toast.LENGTH_SHORT).show();
-        else {
-          // do something based on error code
-        }
-      }
-    });*/
-
+        new GameOverEvent(Integer.parseInt(coinView.getText().toString()),
+                            Integer.parseInt(timeView.getText().toString()))
+                .sendInBackground(this.<Void>printCallBack());
         refreshTimeCoin();
     }
 
     void getPlayerRank() {
-        new TopPlayersLeaderBoard().getPlayerRankInBackground(this.<BacktoryLeaderBoard.LeaderBoardRank>printCallBack());
-    /*new TopPlayersLeaderBoard().getPlayerRankInBackground(new BacktoryCallBack<LeaderBoardRank>() {
-      @Override
-      public void onResponse(BacktoryResponse<LeaderBoardRank> response) {
-        String leaderboardPosition = "my rank: " + response.body().getRank() + "\n my scores: " + response.body().getScores();
-        if (response.isSuccessful())
-          Toast.makeText(getContext(), leaderboardPosition, Toast.LENGTH_SHORT).show();
-        else {
-          // do something based on error code
-        }
-      }
-    });*/
+        new TopPlayersLeaderBoard().getPlayerRankInBackground(this.<LeaderBoardRank>printCallBack());
     }
 
     void getTopPlayers() {
-        new TopPlayersLeaderBoard().getTopPlayersInBackground(2, this.<BacktoryLeaderBoard.LeaderBoardResponse>printCallBack());
-    /*new TopPlayersLeaderBoard().getTopPlayersInBackground(2, new BacktoryCallBack<LeaderBoardResponse>() {
-      @Override
-      public void onResponse(BacktoryResponse<LeaderBoardResponse> response) {
-        if (response.isSuccessful()) {
-          UserProfile topPlayer = response.body().getUsersProfile().get(0);
-          textView.setText("best player is: " + topPlayer.getUserBriefProfile().getUserName()
-              + "\n scoring: " + topPlayer.getScores());
-        } else {
-          // do something based on error code
-        }
-      }
-    });*/
+        new TopPlayersLeaderBoard().getTopPlayersInBackground(2, this.<LeaderBoardResponse>printCallBack());
     }
 
     void getAroundMePlayers() {
-        new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(2, this.<BacktoryLeaderBoard.LeaderBoardResponse>printCallBack());
-    /*new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(3, new BacktoryCallBack<LeaderBoardResponse>() {
-          @Override
-          public void onResponse(BacktoryResponse<LeaderBoardResponse> response) {
-            if (response.isSuccessful()) {
-              UserProfile aboveMePlayer = response.body().getUsersProfile().get(0);
-              UserProfile belowMePlayer = response.body().getUsersProfile().get(2);
-
-              textView.setText("you are behind " + aboveMePlayer.getUserBriefProfile().getUserName()
-                  + "\n but better than " + belowMePlayer.getUserBriefProfile().getUserName();
-            } else {
-              // do something based on error code
-            }
-          }
-        });*/
+        new TopPlayersLeaderBoard().getPlayersAroundMeInBackground(2, this.<LeaderBoardResponse>printCallBack());
     }
 
     private void refreshTimeCoin() {

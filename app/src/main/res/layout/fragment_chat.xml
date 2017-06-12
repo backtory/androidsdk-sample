@@ -48,6 +48,14 @@
             android:text="realtime connect" />
 
         <Button
+            android:id="@+id/realtime_disconnect"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="realtime disconnect" />
+
+        <Button
             android:id="@+id/send_chat_message"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
