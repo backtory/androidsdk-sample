@@ -20,9 +20,9 @@ repositories {
 ```
 and this line to its dependencies segment
 ```java
-compile 'com.backtory.android:backtorysdk:<latest-version>'
+compile 'com.pegah.backtory:backtory-android-sdk:<latest-version>'
 ```
-Latest version: [ ![Download](https://api.bintray.com/packages/pegah-backtory/maven/backtorysdk/images/download.svg) ](https://bintray.com/pegah-backtory/maven/backtorysdk/_latestVersion)
+Latest version: [ ![Download](https://api.bintray.com/packages/pegah-backtory/maven/backtory-android-sdk/images/download.svg) ](https://bintray.com/pegah-backtory/maven/backtory-android-sdk/_latestVersion)
 
 Checkout Backtory Android sdk [documentations] (https://backtory.com/docs/android/intro.html)
 for more info about sdk installation and using backtory services in Android applications.
