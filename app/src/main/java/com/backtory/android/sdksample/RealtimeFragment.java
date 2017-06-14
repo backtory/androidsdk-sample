@@ -95,11 +95,17 @@ public class RealtimeFragment extends MainActivity.AbsFragment implements Realti
         matchApi.sendMatchResultAsync(winners, this.<Void>printCallBack());
     }
 
-
+    private void disconnectFromMatch() {
+        if (matchApi == null) {
+            textView.setText("No match is available.");
+            return;
+        }
+        matchApi.disconnectAsync(this.<Void>printCallBack());
+    }
 
     @Override
     protected int[] getButtonsId() {
-        return new int[]{R.id.connect_to_match, R.id.send_event,
+        return new int[]{R.id.connect_to_match, R.id.send_event, R.id.disconnect_from_match,
                             R.id.direct_message, R.id.send_chat_to_match, R.id.send_match_result};
     }
 
@@ -116,6 +122,9 @@ public class RealtimeFragment extends MainActivity.AbsFragment implements Realti
                 break;
             case R.id.send_event:
                 sendEvent();
+                break;
+            case R.id.disconnect_from_match:
+                disconnectFromMatch();
                 break;
             case R.id.direct_message:
                 directMessage();

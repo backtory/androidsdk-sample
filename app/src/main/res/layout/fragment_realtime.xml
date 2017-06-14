@@ -47,6 +47,14 @@
             android:layout_weight="1"
             android:text="send_event" />
 
+        <Button
+            android:id="@+id/disconnect_from_match"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="disconnect from match" />
+
     </LinearLayout>
 
     <LinearLayout

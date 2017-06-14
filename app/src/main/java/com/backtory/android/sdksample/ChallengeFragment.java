@@ -11,6 +11,7 @@ import com.backtory.java.realtime.core.listeners.ChallengeListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ActiveChallengesListResponse;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeAcceptedMessage;
+import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeCanceledMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeDeclinedMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeExpiredMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeImpossibleMessage;
@@ -49,15 +50,31 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
         BacktoryRealtimeAndroidApi.getInstance().disconnectAsync(this.<Void>printCallBack());
     }
 
+    private String requestedChallengeId = null;
+
     private void requestChallenge() {
         List<String> challengedUsers = new ArrayList<>();
         challengedUsers.add(TestUser.getFirst().userId);
         BacktoryRealtimeAndroidApi.getInstance().requestChallengeAsync(
-                challengedUsers, 25, 2, this.<ChallengeResponse>printCallBack());
+                challengedUsers, 25, 2, new BacktoryCallBack<ChallengeResponse>() {
+                    @Override
+                    public void onResponse(BacktoryResponse<ChallengeResponse> response) {
+                        ChallengeFragment.this.<ChallengeResponse>printCallBack().onResponse(response);
+                        if (response.isSuccessful()) {
+                            ChallengeFragment.this.requestedChallengeId =
+                                    response.body().getChallengeId();
+                        }
+                    }
+                });
     }
 
     private void cancelChallenge() {
-        // TODO: 2/17/17 Implement this.
+        if (requestedChallengeId == null) {
+            textView.setText("No requestedChallengeId available!");
+            return;
+        }
+        BacktoryRealtimeAndroidApi.getInstance().cancelChallengeAsync(
+                requestedChallengeId, this.<Void>printCallBack());
     }
 
     private String invitedChallengeId;
@@ -144,6 +161,12 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
     @Override
     public void onChallengeDeclined(ChallengeDeclinedMessage challengeDeclinedMessage) {
         textView.setText("Challenge declined!\n" + MainActivity.gson.toJson(challengeDeclinedMessage));
+    }
+
+    @Override
+    public void onChallengeCanceled(ChallengeCanceledMessage challengeCanceledMessage) {
+        textView.setText("Challenge cancelled!\n" + MainActivity.gson.toJson(challengeCanceledMessage));
+        invitedChallengeId = null;
     }
 
     @Override

@@ -11,9 +11,9 @@ import com.backtory.java.internal.BacktoryResponse;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
  */
 public class CloudCodeFragment extends MainActivity.AbsFragment {
-
 
     @Override
     protected int[] getButtonsId() {
@@ -28,16 +28,8 @@ public class CloudCodeFragment extends MainActivity.AbsFragment {
     //-------------------------------------------------------------
 
     void publicEcho() {
-        //BacktoryCloudCode.runInBackground("echo", "body body body!", false, String.class, this.<String>printCallBack());
-        BacktoryCloudCode.runInBackground(
-                "echo", "body body body!",
-                String.class, new BacktoryCallBack<String>() {
-                    @Override
-                    public void onResponse(BacktoryResponse<String> response) {
-                        if (response.isSuccessful())
-                            textView.setText(response.body());
-                    }
-                });
+        BacktoryCloudCode.runInBackground("echo", "body body body!", String.class,
+                this.<String>printCallBack());
     }
 
     void privateGetPerson() {
@@ -51,7 +43,6 @@ public class CloudCodeFragment extends MainActivity.AbsFragment {
                     textView.setText("search failed\n" + response.code() + " " + HttpStatusCode.getErrorByCode(response.code()).name());
             }
         });
-
     }
 
     @Override

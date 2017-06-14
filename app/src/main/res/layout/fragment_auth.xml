@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_register_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -36,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="register" />
+
         <Button
             android:id="@+id/button_login_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -43,13 +45,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="login" />
-        <!--<Button
-            android:id="@+id/button_new_token"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="new token" />-->
+
         <Button
             android:id="@+id/button_guest_login"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -57,12 +53,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="guest login" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_complete_guest"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -70,6 +68,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="cmplt guest" />
+
         <Button
             android:id="@+id/button_change_pass"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -77,13 +76,22 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="change pass" />
-        <!--<Button
+
+        <Button
             android:id="@+id/button_forget_pass"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="forget pass" />-->
+            android:text="forget pass" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_current_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -91,19 +99,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="current user" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!--<Button
-            android:id="@+id/button_user_by_name"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="user by name" />-->
         <Button
             android:id="@+id/button_update_user"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -111,6 +107,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="update user" />
+
         <Button
             android:id="@+id/button_logout"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -118,13 +115,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="logout" />
-        <!--<Button
-            android:id="@+id/button_user_by_id"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="guest reg" />-->
+
     </LinearLayout>
 
 </LinearLayout>

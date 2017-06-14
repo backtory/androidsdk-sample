@@ -12,7 +12,7 @@ public class TestUser {
             .setUsername("testUser")
             .setPassword("12341234")
             .setEmail("mm49307@gmail.com")
-            .setUserId("58c188f8e4b09a3f67c63fbc")
+            .setUserId("593d6888e4b0c8960312d7b4")
             .build();
     private static TestUser second = new TestUserBuilder()
             .setName("TestUser2")
@@ -20,7 +20,7 @@ public class TestUser {
             .setUsername("testUser2")
             .setPassword("12341234")
             .setEmail("mm493072@gmail.com")
-            .setUserId("58a1d423e4b09c2c6a51de27")
+            .setUserId("593d68c5e4b044a0bab405aa")
             .build();
 
     public static TestUser getFirst() {
