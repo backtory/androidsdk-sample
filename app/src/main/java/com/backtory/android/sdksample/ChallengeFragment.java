@@ -11,7 +11,7 @@ import com.backtory.java.realtime.core.listeners.ChallengeListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ActiveChallengesListResponse;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeAcceptedMessage;
-import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeCanceledMessage;
+import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeCancelledMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeDeclinedMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeExpiredMessage;
 import com.backtory.java.realtime.core.models.connectivity.challenge.ChallengeImpossibleMessage;
@@ -54,7 +54,13 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
 
     private void requestChallenge() {
         List<String> challengedUsers = new ArrayList<>();
-        challengedUsers.add(TestUser.getFirst().userId);
+
+        if (BacktoryUser.getCurrentUser().getUserId().equals(TestUser.getFirst().userId)) {
+            challengedUsers.add(TestUser.getSecond().userId);
+        } else {
+            challengedUsers.add(TestUser.getFirst().userId);
+        }
+
         BacktoryRealtimeAndroidApi.getInstance().requestChallengeAsync(
                 challengedUsers, 25, 2, new BacktoryCallBack<ChallengeResponse>() {
                     @Override
@@ -164,8 +170,8 @@ public class ChallengeFragment extends MainActivity.AbsFragment implements Chall
     }
 
     @Override
-    public void onChallengeCanceled(ChallengeCanceledMessage challengeCanceledMessage) {
-        textView.setText("Challenge cancelled!\n" + MainActivity.gson.toJson(challengeCanceledMessage));
+    public void onChallengeCanceled(ChallengeCancelledMessage challengeCancelledMessage) {
+        textView.setText("Challenge cancelled!\n" + MainActivity.gson.toJson(challengeCancelledMessage));
         invitedChallengeId = null;
     }
 
