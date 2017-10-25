@@ -16,8 +16,10 @@ import com.backtory.java.realtime.core.models.connectivity.chat.ChatGroupType;
 import com.backtory.java.realtime.core.models.connectivity.chat.ChatGroupsListResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.ChatInvitationMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.GroupChatHistoryResponse;
+import com.backtory.java.realtime.core.models.connectivity.chat.OfflineMessageResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.SimpleChatMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserAddedMessage;
+import com.backtory.java.realtime.core.models.connectivity.chat.UserChatHistoryResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserJoinedMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserLeftMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserRemovedMessage;
@@ -52,6 +54,20 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 "Working!", ChatFragment.this.<Void>printCallBack());
     }
 
+    private void requestChatHistory() {
+        BacktoryRealtimeAndroidApi.getInstance().requestUserChatHistoryAsync(
+                TestUser.getFirst().userId, Calendar.getInstance().getTimeInMillis(),
+                this.<UserChatHistoryResponse>printCallBack());
+    }
+
+    private void requestOfflineChats() {
+        BacktoryRealtimeAndroidApi.getInstance().requestOfflineMessagesAsync(
+                this.<OfflineMessageResponse>printCallBack());
+    }
+
+    
+
+
     /* Group Chat */
     private void createChatGroup() {
         int id = new Random().nextInt(10);
@@ -71,6 +87,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 }
             }
         });
+
     }
 
     private void requestMembersList() {
@@ -123,6 +140,13 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 chatGroupList.get(id).getGroupId(), Calendar.getInstance().getTimeInMillis(),
                 this.<GroupChatHistoryResponse>printCallBack());
     }
+
+
+
+
+
+
+
 
     private String invitedGroupId;
 
@@ -197,6 +221,12 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 break;
             case R.id.send_chat_message:
                 sendChatMessage();
+                break;
+            case R.id.request_chat_history:
+                requestChatHistory();
+                break;
+            case R.id.request_offline_chats:
+                requestOfflineChats();
                 break;
             case R.id.create_chat_group:
                 createChatGroup();

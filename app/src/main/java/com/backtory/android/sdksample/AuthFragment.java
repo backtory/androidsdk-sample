@@ -89,7 +89,6 @@ public class AuthFragment extends MainActivity.AbsFragment {
         currentUser.setEmail(generateEmail(true));
         currentUser.setPhoneNumber("22222222");
         currentUser.updateInBackground(this.<BacktoryUser>printCallBack());
-
     }
 
     private void logout() {
@@ -100,8 +99,8 @@ public class AuthFragment extends MainActivity.AbsFragment {
     @Override
     protected int[] getButtonsId() {
         return new int[]{R.id.button_register_user, R.id.button_login_user, R.id.button_guest_login,
-                R.id.button_complete_guest, R.id.button_change_pass, R.id.button_current_user,
-                R.id.button_update_user, R.id.button_logout};
+                R.id.button_complete_guest, R.id.button_change_pass, R.id.button_forget_pass,
+                R.id.button_current_user, R.id.button_update_user, R.id.button_logout};
     }
 
     @Override
@@ -135,6 +134,9 @@ public class AuthFragment extends MainActivity.AbsFragment {
                 break;
             case R.id.button_change_pass:
                 changePass();
+                break;
+            case R.id.button_forget_pass:
+                forgetPass();
                 break;
             case R.id.button_update_user:
                 updateUser();

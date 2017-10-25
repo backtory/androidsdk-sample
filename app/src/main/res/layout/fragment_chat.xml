@@ -71,6 +71,29 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/request_chat_history"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="request user chat history" />
+
+        <Button
+            android:id="@+id/request_offline_chats"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="request offline chats" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
             android:id="@+id/create_chat_group"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
