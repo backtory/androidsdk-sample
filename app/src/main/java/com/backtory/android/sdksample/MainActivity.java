@@ -1,5 +1,6 @@
 package com.backtory.android.sdksample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     static String lastGenEmail = "";
     static String lastGenUsername = "";
     static String lastGenPassword = "";
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager()));
 
         // Give the TabLayout the ViewPager
@@ -115,8 +117,19 @@ public class MainActivity extends AppCompatActivity {
     //---------------------------------------------------------------------------
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Fragment f = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + viewPager.getCurrentItem());
+        if (f != null)
+            f.onActivityResult(requestCode, resultCode, data);
+        else
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+
     public static class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
-        private String tabTitles[] = new String[]{"Auth", "Lambda", "Game", "Storage", "Database",
+        private String tabTitles[] = new String[]{"Auth", "Google Auth", "Lambda", "Game", "Storage", "Database",
                                                     "Matchmaking", "Challenge", "Realtime", "Chat"};
 
         SampleFragmentPagerAdapter(FragmentManager fm) {
@@ -129,25 +142,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public AbsFragment getItem(int position) {
+        public Fragment getItem(int position) {
             switch (position) {
                 case 0:
                     return new AuthFragment();
                 case 1:
-                    return new CloudCodeFragment();
+                    return new GoogleAuthFragment();
                 case 2:
-                    return new GameFragment();
+                    return new CloudCodeFragment();
                 case 3:
-                    return new FileStorageFragment();
+                    return new GameFragment();
                 case 4:
-                    return new DatabaseFragment();
+                    return new FileStorageFragment();
                 case 5:
-                    return new MatchmakingFragment();
+                    return new DatabaseFragment();
                 case 6:
-                    return new ChallengeFragment();
+                    return new MatchmakingFragment();
                 case 7:
-                    return RealtimeFragment.getInstance();
+                    return new ChallengeFragment();
                 case 8:
+                    return RealtimeFragment.getInstance();
+                case 9:
                     return new ChatFragment();
             }
             return null;
@@ -158,5 +173,7 @@ public class MainActivity extends AppCompatActivity {
             // Generate title based on item position
             return tabTitles[position];
         }
+
+
     }
 }
