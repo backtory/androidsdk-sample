@@ -16,10 +16,8 @@ import com.backtory.java.realtime.core.models.connectivity.chat.ChatGroupType;
 import com.backtory.java.realtime.core.models.connectivity.chat.ChatGroupsListResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.ChatInvitationMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.GroupChatHistoryResponse;
-import com.backtory.java.realtime.core.models.connectivity.chat.OfflineMessageResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.SimpleChatMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserAddedMessage;
-import com.backtory.java.realtime.core.models.connectivity.chat.UserChatHistoryResponse;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserJoinedMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserLeftMessage;
 import com.backtory.java.realtime.core.models.connectivity.chat.UserRemovedMessage;
@@ -29,12 +27,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by mohammad on 2/15/17.
+ * Created by Behnam on 11/1/2017.
  *
  */
-public class ChatFragment extends MainActivity.AbsFragment implements ChatListener {
 
-    /* Person-to-Person Chat */
+public class GroupChatFragment extends MainActivity.AbsFragment implements ChatListener {
+
+    /* login and realtime connect */
     private void loginChatUser() {
         BacktoryUser.loginInBackground(TestUser.getFirst().username, TestUser.getFirst().password,
                 this.<LoginResponse>printCallBack());
@@ -48,24 +47,6 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
     private void realtimeDisconnect() {
         BacktoryRealtimeAndroidApi.getInstance().disconnectAsync(this.<Void>printCallBack());
     }
-
-    private void sendChatMessage() {
-        BacktoryRealtimeAndroidApi.getInstance().sendChatToUserAsync(TestUser.getFirst().userId,
-                "Working!", ChatFragment.this.<Void>printCallBack());
-    }
-
-    private void requestChatHistory() {
-        BacktoryRealtimeAndroidApi.getInstance().requestUserChatHistoryAsync(
-                TestUser.getFirst().userId, Calendar.getInstance().getTimeInMillis(),
-                this.<UserChatHistoryResponse>printCallBack());
-    }
-
-    private void requestOfflineChats() {
-        BacktoryRealtimeAndroidApi.getInstance().requestOfflineMessagesAsync(
-                this.<OfflineMessageResponse>printCallBack());
-    }
-
-    
 
 
     /* Group Chat */
@@ -81,7 +62,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
         BacktoryRealtimeAndroidApi.getInstance().requestListOfChatGroupsAsync(new BacktoryCallBack<ChatGroupsListResponse>() {
             @Override
             public void onResponse(BacktoryResponse<ChatGroupsListResponse> response) {
-                ChatFragment.this.<ChatGroupsListResponse>printCallBack().onResponse(response);
+                GroupChatFragment.this.<ChatGroupsListResponse>printCallBack().onResponse(response);
                 if (response.isSuccessful()) {
                     chatGroupList = response.body().getGroupInfoList();
                 }
@@ -167,7 +148,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
         BacktoryRealtimeAndroidApi.getInstance().joinChatGroupAsync(invitedGroupId, new BacktoryCallBack<Void>() {
             @Override
             public void onResponse(BacktoryResponse<Void> response) {
-                ChatFragment.this.<Void>printCallBack().onResponse(response);
+                GroupChatFragment.this.<Void>printCallBack().onResponse(response);
                 invitedGroupId = null;
             }
         });
@@ -195,16 +176,16 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
 
     @Override
     protected int[] getButtonsId() {
-        return new int[]{R.id.login_chat_user, R.id.realtime_connect, R.id.realtime_disconnect, R.id.send_chat_message,
-                            R.id.create_chat_group, R.id.request_groups_list, R.id.request_members_list,
-                            R.id.add_group_member, R.id.remove_group_member, R.id.send_chat_to_group,
-                            R.id.request_group_chat_history, R.id.invite_to_group,
-                            R.id.join_group, R.id.leave_group, R.id.make_member_owner};
+        return new int[]{R.id.login_chat_user, R.id.realtime_connect, R.id.realtime_disconnect,
+                R.id.create_chat_group, R.id.request_groups_list, R.id.request_members_list,
+                R.id.add_group_member, R.id.remove_group_member, R.id.send_chat_to_group,
+                R.id.request_group_chat_history, R.id.invite_to_group,
+                R.id.join_group, R.id.leave_group, R.id.make_member_owner};
     }
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_chat;
+        return R.layout.fragment_group_chat;
     }
 
     @Override
@@ -218,15 +199,6 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
                 break;
             case R.id.realtime_disconnect:
                 realtimeDisconnect();
-                break;
-            case R.id.send_chat_message:
-                sendChatMessage();
-                break;
-            case R.id.request_chat_history:
-                requestChatHistory();
-                break;
-            case R.id.request_offline_chats:
-                requestOfflineChats();
                 break;
             case R.id.create_chat_group:
                 createChatGroup();
@@ -271,7 +243,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
 
     @Override
     public void onChatMessage(SimpleChatMessage simpleChatMessage) {
-        textView.setText("Chat message received:\n" + MainActivity.gson.toJson(simpleChatMessage));
+
     }
 
     @Override
