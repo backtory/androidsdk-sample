@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="server-client-id" android:value="7923602947-lvp097nnatp8h7td2uiu8tpqb57dlrse.apps.googleusercontent.com"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

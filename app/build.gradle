@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.backtory.android.sdksample"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 3
         versionName "1.2"
 
@@ -27,17 +27,19 @@ android {
     }
 }
 repositories {
-    //mavenLocal ()
+    mavenLocal ()
     maven {
         url 'https://dl.bintray.com/pegah-backtory/maven/'
     }
+    google()
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
+    //testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'com.pegah.backtory:backtory-android-sdk:0.6.2'
+    compile 'com.pegah.backtory:backtory-google-login:0.6.2'
     debugCompile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 }
