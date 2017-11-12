@@ -5,7 +5,6 @@ import android.view.View;
 import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryResponse;
 import com.backtory.java.internal.BacktoryUser;
-import com.backtory.java.internal.LoginResponse;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.core.listeners.MatchmakingListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
@@ -27,13 +26,13 @@ public class MatchmakingFragment extends MainActivity.AbsFragment implements Mat
 
     private void loginMMUser1() {
         BacktoryUser.loginInBackground(TestUser.getFirst().username, TestUser.getFirst().password,
-                this.<LoginResponse>printCallBack());
+                this.<Void>printCallBack());
         BacktoryRealtimeAndroidApi.getInstance().setMatchmakingListener(this);
     }
 
     private void loginMMUser2() {
         BacktoryUser.loginInBackground(TestUser.getSecond().username, TestUser.getSecond().password,
-                this.<LoginResponse>printCallBack());
+                this.<Void>printCallBack());
         BacktoryRealtimeAndroidApi.getInstance().setMatchmakingListener(this);
     }
 

@@ -1,20 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "com.backtory.android.sdksample"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 3
         versionName "1.2"
 
         buildConfigField "String", "backtory_auth_key", '"575d1432e4b006215e29ad9a"'
         buildConfigField "String", "backtory_auth_instance_id", '"575d1432e4b099f61fd535cd"'
         buildConfigField "String", "backtory_object_storage_instance_id", '"575d1432e4b099f61fd535cf"'
-        buildConfigField "String", "backtory_lambda_instance_id", '"575d1433e4b099f61fd535d1"'
+        buildConfigField "String", "backtory_cloudcode_instance_id", '"575d1433e4b099f61fd535d1"'
         buildConfigField "String", "backtory_game_instance_id", '"575d1432e4b099f61fd535d0"'
         buildConfigField "String", "backtory_storage_instance_id", '"578df3c9e4b0ca538f290810"'
         buildConfigField "String", "backtory_connectivity_instance_id", '"57fb6c32e4b064683efcbfa8"'
@@ -35,9 +35,10 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'org.apache.commons:commons-lang3:3.0'
-    compile 'com.pegah.backtory:backtory-android-sdk:0.6.2'
+    compile 'com.pegah.backtory:backtory-android-sdk:0.6.4'
+    compile 'com.pegah.backtory:backtory-iap:0.6.4'
     debugCompile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 }

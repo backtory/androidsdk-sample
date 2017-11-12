@@ -12,7 +12,7 @@ public class MainApplication extends Application {
 
         BacktoryClient.init(KeyConfiguration.newBuilder().
                 setAuthKeys(BuildConfig.backtory_auth_instance_id, BuildConfig.backtory_auth_key).
-                setCloudcodeKey(BuildConfig.backtory_lambda_instance_id).
+                setCloudcodeKey(BuildConfig.backtory_cloudcode_instance_id).
                 setGameKey(BuildConfig.backtory_game_instance_id).
                 setObjectStorageKey(BuildConfig.backtory_object_storage_instance_id).
                 setFileStorageKey(BuildConfig.backtory_storage_instance_id).

@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
-        private String tabTitles[] = new String[]{"Auth", "Lambda", "Game", "Storage", "Database",
-                                                    "Matchmaking", "Challenge", "Realtime", "Chat"};
+        private String tabTitles[] = new String[]{"Auth", "CloudCode", "Game", "Storage", "Database",
+                                                    "Matchmaking", "Challenge", "Realtime", "Chat", "InApp Purchase"};
 
         SampleFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -149,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
                     return RealtimeFragment.getInstance();
                 case 8:
                     return new ChatFragment();
+                case 9:
+                    return new InAppPurchaseFragment();
             }
             return null;
         }

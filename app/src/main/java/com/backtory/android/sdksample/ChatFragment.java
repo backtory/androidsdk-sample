@@ -5,7 +5,6 @@ import android.view.View;
 import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryResponse;
 import com.backtory.java.internal.BacktoryUser;
-import com.backtory.java.internal.LoginResponse;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.core.listeners.ChatListener;
 import com.backtory.java.realtime.core.models.ConnectResponse;
@@ -37,7 +36,7 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
     /* Person-to-Person Chat */
     private void loginChatUser() {
         BacktoryUser.loginInBackground(TestUser.getFirst().username, TestUser.getFirst().password,
-                this.<LoginResponse>printCallBack());
+                this.<Void>printCallBack());
         BacktoryRealtimeAndroidApi.getInstance().setChatListener(this);
     }
 
@@ -66,7 +65,6 @@ public class ChatFragment extends MainActivity.AbsFragment implements ChatListen
     }
 
     
-
 
     /* Group Chat */
     private void createChatGroup() {

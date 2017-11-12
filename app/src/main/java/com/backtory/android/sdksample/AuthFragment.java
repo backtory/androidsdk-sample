@@ -8,7 +8,6 @@ import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryResponse;
 import com.backtory.java.internal.BacktoryUser;
 import com.backtory.java.internal.GuestRegistrationParam;
-import com.backtory.java.internal.LoginResponse;
 
 import static com.backtory.android.sdksample.MainActivity.generateEmail;
 import static com.backtory.android.sdksample.MainActivity.generatePassword;
@@ -32,7 +31,7 @@ public class AuthFragment extends MainActivity.AbsFragment {
 
     private void login() {
         try {
-            BacktoryUser.loginInBackground(lastGenUsername, lastGenPassword, this.<LoginResponse>printCallBack());
+            BacktoryUser.loginInBackground(lastGenUsername, lastGenPassword, this.<Void>printCallBack());
         } catch (IllegalStateException ise) {
             toast(ise.getMessage());
         }
@@ -40,16 +39,17 @@ public class AuthFragment extends MainActivity.AbsFragment {
 
     private void guestLogin() {
         try {
-            BacktoryUser.loginAsGuestInBackground(new BacktoryCallBack<LoginResponse>() {
+            BacktoryUser.loginAsGuestInBackground(new BacktoryCallBack<Void>() {
                 @Override
-                public void onResponse(BacktoryResponse<LoginResponse> response) {
+                public void onResponse(BacktoryResponse<Void> response) {
                     if (response.isSuccessful()) {
                         lastGenUsername = BacktoryUser.getCurrentUser().getUsername();
                         lastGenPassword = BacktoryUser.getCurrentUser().getGuestPassword();
                         textView.setText(gson.toJson(response.body()));
                     } else {
                         HttpStatusCode statusCode = HttpStatusCode.getErrorByCode(response.code());
-                        textView.setText(statusCode.code() + statusCode.name());
+                        textView.setText(
+                                String.format("%d %s", statusCode.code(), statusCode.name()));
                     }
                 }
             });
@@ -113,8 +113,8 @@ public class AuthFragment extends MainActivity.AbsFragment {
         if (currentUser == null)
             textView.setText("No current user!");
         else
-            textView.setText("firsName: " + currentUser.getFirstName() + "\n" +
-                    "username: " + currentUser.getUsername());
+            textView.setText(String.format("firsName: %s\nusername: %s",
+                    currentUser.getFirstName(), currentUser.getUsername()));
     }
 
     @Override

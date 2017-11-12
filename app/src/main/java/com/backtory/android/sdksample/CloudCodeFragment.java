@@ -40,7 +40,8 @@ public class CloudCodeFragment extends MainActivity.AbsFragment {
                     Person person = response.body();
                     textView.setText("search result\nname: " + person.name);
                 } else
-                    textView.setText("search failed\n" + response.code() + " " + HttpStatusCode.getErrorByCode(response.code()).name());
+                    textView.setText(String.format("search failed.\n%d %s",
+                            response.code(), HttpStatusCode.getErrorByCode(response.code()).name()));
             }
         });
     }
