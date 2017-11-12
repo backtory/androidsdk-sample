@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="send_event" />
+            android:text="send event" />
 
         <Button
             android:id="@+id/disconnect_from_match"

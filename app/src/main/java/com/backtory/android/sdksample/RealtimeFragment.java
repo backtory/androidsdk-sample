@@ -2,6 +2,7 @@ package com.backtory.android.sdksample;
 
 import android.view.View;
 
+import com.backtory.java.internal.BacktoryUser;
 import com.backtory.java.realtime.android.BacktoryRealtimeAndroidApi;
 import com.backtory.java.realtime.android.BacktoryRealtimeMatchAndroidApi;
 import com.backtory.java.realtime.core.listeners.MatchListener;
@@ -73,7 +74,12 @@ public class RealtimeFragment extends MainActivity.AbsFragment implements Realti
             textView.setText("No match is available.");
             return;
         }
-        matchApi.directToUserAsync(TestUser.getSecond().userId, "Hello, what's up?!",
+        String opponentUserId =
+                BacktoryUser.getCurrentUser().getUserId()
+                        .equals(TestUser.getFirst().userId) ?
+                        TestUser.getSecond().userId :
+                        TestUser.getFirst().userId;
+        matchApi.directToUserAsync(opponentUserId, "Hello, what's up?!",
                 this.<Void>printCallBack());
     }
 

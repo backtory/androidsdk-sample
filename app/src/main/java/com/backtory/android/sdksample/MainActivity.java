@@ -1,5 +1,6 @@
 package com.backtory.android.sdksample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -29,22 +30,31 @@ public class MainActivity extends AppCompatActivity {
     static String lastGenUsername = "";
     static String lastGenPassword = "";
 
+    ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager()));
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        //PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment f = fragmentManager.findFragmentByTag(
+                "android:switcher:" + R.id.viewpager + ":" + viewPager.getCurrentItem());
+        if (f != null && f instanceof InAppPurchaseFragment)
+            f.onActivityResult(requestCode, resultCode, data);
+        else
+            super.onActivityResult(requestCode, resultCode, data);
+    }
 
     //-----------------------------------------------------------------------------
 
