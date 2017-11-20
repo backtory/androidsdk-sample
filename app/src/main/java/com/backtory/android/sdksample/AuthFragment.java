@@ -7,7 +7,7 @@ import com.backtory.java.HttpStatusCode;
 import com.backtory.java.internal.BacktoryCallBack;
 import com.backtory.java.internal.BacktoryResponse;
 import com.backtory.java.internal.BacktoryUser;
-import com.backtory.java.internal.GuestRegistrationParam;
+import com.backtory.java.model.GuestRegistrationParam;
 
 import static com.backtory.android.sdksample.MainActivity.generateEmail;
 import static com.backtory.android.sdksample.MainActivity.generatePassword;
@@ -45,7 +45,7 @@ public class AuthFragment extends MainActivity.AbsFragment {
                     if (response.isSuccessful()) {
                         lastGenUsername = BacktoryUser.getCurrentUser().getUsername();
                         lastGenPassword = BacktoryUser.getCurrentUser().getGuestPassword();
-                        textView.setText(gson.toJson(response.body()));
+                        textView.setText("successfully logged in! \n" + gson.toJson(BacktoryUser.getCurrentUser()));
                     } else {
                         HttpStatusCode statusCode = HttpStatusCode.getErrorByCode(response.code());
                         textView.setText(
@@ -59,6 +59,10 @@ public class AuthFragment extends MainActivity.AbsFragment {
     }
 
     private void completeGuestReg() {
+        if (BacktoryUser.getCurrentUser().isGuest()) {
+            textView.setText("Guest user's password can not be changed!");
+            return;
+        }
         lastGenUsername = generateUsername(true);
         lastGenPassword = "guest pass";
         BacktoryUser.getCurrentUser().completeRegistrationInBackground(new GuestRegistrationParam.Builder().
@@ -69,6 +73,11 @@ public class AuthFragment extends MainActivity.AbsFragment {
     }
 
     private void changePass() {
+        if (BacktoryUser.getCurrentUser().isGuest()) {
+            textView.setText("Guest user's password can not be changed!");
+            return;
+        }
+
         BacktoryUser.getCurrentUser().changePasswordInBackground(lastGenPassword, "4321", new BacktoryCallBack<Void>() {
             @Override
             public void onResponse(BacktoryResponse<Void> response) {
@@ -113,8 +122,8 @@ public class AuthFragment extends MainActivity.AbsFragment {
         if (currentUser == null)
             textView.setText("No current user!");
         else
-            textView.setText(String.format("firsName: %s\nusername: %s",
-                    currentUser.getFirstName(), currentUser.getUsername()));
+            textView.setText(String.format("firsName: %s\nusername: %s\nguest: %b\nactive: %b",
+                    currentUser.getFirstName(), currentUser.getUsername(), currentUser.isGuest(), currentUser.isActive()));
     }
 
     @Override

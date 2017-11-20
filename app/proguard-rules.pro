@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepclassmembers class com.backtory.android.sdksample.CloudCodeFragment$Person { <fields>; }
+-keepclassmembers class com.backtory.android.sdksample.CloudCodeFragment$Info { <fields>; }
+-keepclassmembers class com.backtory.android.iap.IapResult { <fields>; }
+-keepclassmembers class com.backtory.android.iap.Purchase { <fields>; }
+-keepclassmembers class com.backtory.android.iap.SkuDetails { <fields>; }
