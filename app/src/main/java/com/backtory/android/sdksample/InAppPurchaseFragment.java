@@ -179,9 +179,9 @@ public class InAppPurchaseFragment extends MainActivity.AbsFragment implements B
     @Override
     public void onPurchaseFinished(IapResult result, Purchase purchase, String webhookMessage) {
         textView.setText("Purchase finished.\nResult: " + MainActivity.gson.toJson(result) +
-                "\nPurchase: " + purchase.toJSONObject() +
+                "\nPurchase: " + (purchase != null ? purchase.toJSONObject() : "null") +
                 "\nWebhook message: " + webhookMessage);
-        if (purchase != null) {
+        if (result.getResultCode() == IapResult.SUCCESS) {
             this.sku = purchase.getProductId();
             this.purchaseToken = purchase.getPurchaseToken();
         }
@@ -192,13 +192,16 @@ public class InAppPurchaseFragment extends MainActivity.AbsFragment implements B
         textView.setText("Consume finished.\nResult: " + MainActivity.gson.toJson(result) +
                 "\nSku: " + sku + "\nPurchaseToken: " + purchaseToken +
                 "\nWebhook message: " + webhookMessage);
+        if (result.getResultCode() == IapResult.SUCCESS) {
+            this.sku = null;
+            this.purchaseToken = null;
+        }
     }
 
     @Override
     public void onSubscriptionFinished(IapResult result, Purchase purchase, String webhookMessage) {
         textView.setText("Subscription finished.\nResult: " + MainActivity.gson.toJson(result) +
-                "\nSubscription: " + purchase.toJSONObject() +
+                "\nSubscription: " + (purchase != null ? purchase.toJSONObject() : "null") +
                 "\nWebhook message: " + webhookMessage);
     }
-
 }

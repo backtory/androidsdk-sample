@@ -5,10 +5,10 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 android {
     signingConfigs {
         release {
-            keyAlias properties.getProperty('keyAlias')
-            keyPassword properties.getProperty('keyPassword')
-            storeFile file(properties.getProperty('storeFile'))
-            storePassword properties.getProperty('keyPassword')
+//            keyAlias properties.getProperty('keyAlias')
+//            keyPassword properties.getProperty('keyPassword')
+//            storeFile file(properties.getProperty('storeFile'))
+//            storePassword properties.getProperty('keyPassword')
         }
     }
     compileSdkVersion 26
