@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Backtory-AndroidSDK-Sample</string>
+
+    <string-array name="iap_item_types">
+        <item>inapp</item>
+        <item>subs</item>
+    </string-array>
+
+    <string-array name="iap_security_types">
+        <item>secure</item>
+        <item>insecure</item>
+    </string-array>
+
+</resources>

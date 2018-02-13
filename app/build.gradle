@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+android {
+    signingConfigs {
+        release {
+//            keyAlias properties.getProperty('keyAlias')
+//            keyPassword properties.getProperty('keyPassword')
+//            storeFile file(properties.getProperty('storeFile'))
+//            storePassword properties.getProperty('keyPassword')
+        }
+
+        debug {
+            keyAlias 'debugKeyAlias'
+            keyPassword '123456'
+            storeFile file('debugKey.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.backtory.android.sdksample"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 3
+        versionName "1.2"
+
+        buildConfigField "String", "backtory_auth_key", '"575d1432e4b006215e29ad9a"'
+        buildConfigField "String", "backtory_auth_instance_id", '"575d1432e4b099f61fd535cd"'
+        buildConfigField "String", "backtory_object_storage_instance_id", '"575d1432e4b099f61fd535cf"'
+        buildConfigField "String", "backtory_cloudcode_instance_id", '"575d1433e4b099f61fd535d1"'
+        buildConfigField "String", "backtory_game_instance_id", '"575d1432e4b099f61fd535d0"'
+        buildConfigField "String", "backtory_storage_instance_id", '"578df3c9e4b0ca538f290810"'
+        buildConfigField "String", "backtory_connectivity_instance_id", '"57fb6c32e4b064683efcbfa8"'
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+repositories {
+    //mavenLocal ()
+    maven {
+        url 'https://dl.bintray.com/pegah-backtory/maven/'
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'com.pegah.backtory:backtory-android-sdk:0.6.6'
+    compile 'com.pegah.backtory:backtory-iap:0.6.6'
+    compile 'com.pegah.backtory:backtory-google-login:0.6.6'
+}
