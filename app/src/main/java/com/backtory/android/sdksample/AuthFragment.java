@@ -154,11 +154,13 @@ public class AuthFragment extends BacktoryGoogleLoginFragment implements View.On
     }
 
 
+
     protected int[] getButtonsId() {
         return new int[]{R.id.button_register_user, R.id.button_login_user, R.id.button_guest_login,
                 R.id.button_complete_guest, R.id.button_change_pass, R.id.button_forget_pass,
                 R.id.button_current_user, R.id.button_update_user, R.id.button_logout , R.id.button_google_login};
     }
+
 
 
     protected int getLayoutRes() {
@@ -173,6 +175,7 @@ public class AuthFragment extends BacktoryGoogleLoginFragment implements View.On
             textView.setText(String.format("firsName: %s\nusername: %s\nguest: %b\nactive: %b",
                     currentUser.getFirstName(), currentUser.getUsername(), currentUser.isGuest(), currentUser.isActive()));
     }
+
 
     protected void loginWithGoogle(){
 
@@ -205,6 +208,7 @@ public class AuthFragment extends BacktoryGoogleLoginFragment implements View.On
         });
 
     }
+
 
 
     @Override
