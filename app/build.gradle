@@ -60,7 +60,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
     compile 'org.apache.commons:commons-lang3:3.6'
-    compile 'com.pegah.backtory:backtory-android-sdk:0.6.6'
-    compile 'com.pegah.backtory:backtory-iap:0.6.6'
-    compile 'com.pegah.backtory:backtory-google-login:0.6.6'
+    compile 'com.pegah.backtory:backtory-android-sdk:0.6.7'
+    compile 'com.pegah.backtory:backtory-iap:0.6.7'
+    compile 'com.pegah.backtory:backtory-google-login:0.6.7'
 }
